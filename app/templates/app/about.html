@@ -1,0 +1,113 @@
+{% extends 'app/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<h3 class="mb-4">Profile</h3>
+<div class="mb-5">
+    <div class="row">
+        <div class="col-md-8">
+            <p>{{ profile_data.introduction|linebreaksbr }}</p>
+        </div>
+        <div class="col-md-4">
+            <div class="card text-center px-5 py-4">
+                <div class="avatar mb-3">
+                    <img src="{{ profile_data.subimage.url }}" alt="" class="card-img-top rounded-circle">
+                </div>
+                <h5 class="font-weight-bolder">{{ profile_data.name }}</h5>
+                <p class="mb-3 small text-center">{{profile_data.job|linebreaksbr }}</p>
+                <div class="d-flex justify-content-around flex-wrap sns-icons">
+                    {% if profile_data.github %}
+                        <a href="{{ profile_data.github }}" target="_blank" class="btn btn-dark sns-icon">
+                            <i class="fab fa-github"></i>
+                        </a>
+                    {% endif %}
+                    {% if profile_data.twitter %}
+                        <a href="{{ profile_data.twitter }}" target="_blank" class="btn btn-dark sns-icon">
+                            <i class="fab fa-x-twitter"></i>
+                        </a>
+                    {% endif %}
+                    {% if profile_data.linkedin %}
+                        <a href="{{ profile_data.linkedin }}" target="_blank" class="btn btn-info sns-icon">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                    {% endif %}
+                    {% if profile_data.facebook %}
+                        <a href="{{ profile_data.facebook }}" target="_blank" class="btn btn-primary sns-icon">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                    {% endif %}
+                    {% if profile_data.instagram %}
+                        <a href="{{ profile_data.instagram }}" target="_blank" class="btn btn-danger sns-icon">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                    {% endif %}
+                    {% if profile_data.qiita %}
+                        <a href="{{ profile_data.qiita }}" target="_blank" class="btn btn-success sns-icon">
+                            <img src="{% static 'img/qiita_logo.png' %}" alt="Qiita" class="sns-icon-img">
+                        </a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<h3 class="mb-4">Experience</h3>
+<div class="mb-5">
+    {% for experience in experience_data %}
+        <div class="d-flex justify-content-between">
+            <h5>{{ experience.occupation }}<span class="small text-secondary"> - {{ experience.company }}</span></h5>
+            <p class="mb-1">{{ experience.period }}</p>
+        </div>
+        <p class="mb-1">{{ experience.description|linebreaksbr }}</p>
+        <p>{{ experience.place }}</p>
+    {% endfor %}
+</div>
+
+<h3 class="mb-4">Education</h3>
+<div class="mb-5">
+    {% for education in education_data %}
+        <div class="d-flex justify-content-between">
+            <h5>{{ education.course }}<span class="small text-secondary"> - {{ education.school }}</span></h5>
+            <p class="mb-1">{{ education.period }}</p>
+        </div>
+        <p>{{ education.place }}</p>
+    {% endfor %}
+</div>
+
+<h3 class="mb-4">Software Skills</h3>
+<div class="mb-5">
+    <div class="row">
+        {% for software in software_data %}
+            <div class="col-6 col-md-3">
+                <h5 class="mb-0">{{ software.name }}<span class="small secondary"> - {{ software.level }}</span></h5>
+                <div class="d-flex flex-row">
+                    <div class="star-rating">
+                        <div class="star-rating-front" style="width: {{ software.percentage }}%">★★★★★</div>
+                        <div class="star-rating-back">★★★★★</div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+<h3 class="mb-4">Technical Skills</h3>
+<div class="mb-5">
+    <div class="row">
+        {% for technical in technical_data %}
+            <div class="col-6 col-md-3">
+                <h5 class="mb-0">{{ technical.name }}<span class="small secondary"> - {{ technical.level }}</span></h5>
+                <div class="d-flex flex-row">
+                    <div class="star-rating">
+                        <div class="star-rating-front" style="width: {{ technical.percentage }}%">★★★★★</div>
+                        <div class="star-rating-back">★★★★★</div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}
